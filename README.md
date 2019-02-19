@@ -39,4 +39,4 @@ and so on...
 there is a 'connect.sh' script included that will connect your Traefik container to all of your
 frontend networks. you only need to run it after creating a new stack.
 the connection is persistent and will remain between reboots and up/down commands.
-you can run the scrip multiple times, it will output an error if the connection already exist. 
+you can run the script multiple times, it will output an error if the connection already exist. 
