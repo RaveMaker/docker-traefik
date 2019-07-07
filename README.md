@@ -40,3 +40,8 @@ there is a 'connect.sh' script included that will connect your Traefik container
 frontend networks. you only need to run it after creating a new stack.
 the connection is persistent and will remain between reboots and up/down commands.
 you can run the script multiple times, it will output an error if the connection already exist. 
+
+Author: [RaveMaker][RaveMaker].
+
+[RaveMaker]: http://ravemaker.net
+ 
