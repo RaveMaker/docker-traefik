@@ -3,7 +3,7 @@ version: '3.7'
 services:
   reverse-proxy:
     image: traefik
-    restart: unless-stopped
+    restart: always
     networks:
       - proxy
     command: --api --docker  # Enables the web UI and tells Traefik to listen to docker
