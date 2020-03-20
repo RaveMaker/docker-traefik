@@ -5,19 +5,21 @@ and integrates with every major cluster technology... No wonder it's so popular!
 
 ## Setup
 1. clone the repo
-2. edit .env file
-3. select your toml file:
-   - traefik.toml - allow http and https
-   - traefik.ssl.toml - redirect http to https 
+2. create `.env` file from `.env.example`
+3. create your `traefik.toml` file from one of supplied templates:
+   - traefik.toml.example - allow http and https
+   - traefik-ssl.toml.example - redirect http to https 
+4. place cert files in `certs` folder 
 
-optional:
-Comment port 8080 in docker-compose file and use port 80/443.
-you can use a local url to access your Traefik dashboard instead,
-using the hostRule label in .env file.
-
+```
+The default user and password for the dashboard is admin/admin.
+make sure to generate a new password using 'htpasswd' and
+replace it in your '.env' file
+```
 ## Network settings:
-The stack is divided into three networks: proxy, backend and frontend.
+Network name is 'proxy'
 
+When you create a stack make sure it's divided into three networks: proxy, backend and frontend.
 the idea behind splitting the stack into three networks
 is to block the access of the reverse proxy to the backend containers.
 
