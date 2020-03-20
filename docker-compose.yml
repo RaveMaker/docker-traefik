@@ -3,22 +3,24 @@ version: '3.7'
 services:
   reverse-proxy:
     image: traefik:1.7
-    restart: always
+    restart: unless-stopped
     networks:
       - proxy
     command: --api --docker  # Enables the web UI and tells Traefik to listen to docker
     ports:
       - "80:80"      # The HTTP port
       - "443:443"    # The HTTPs port
-      - "8080:8080"  # The Web UI (enabled by --api)
     labels:
-      - "traefik.frontend.rule=Host:monitor.docker.localhost"
+      - "traefik.enable=true"
+      - "traefik.backend=${podName}-reverse-proxy"
+      - "traefik.frontend.rule=Host:${hostRule}"
       - "traefik.docker.network=proxy"
       - "traefik.port=8080"
+      - "traefik.frontend.auth.basic=${tUser}:${tMD5Pass}"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock  # So that Traefik can listen to the Docker events
-      - ./traefik.toml:/traefik.toml
       - ./certs/:/certs/
+      - ./traefik.toml:/traefik.toml
 
 networks:
   proxy:
