@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+
+  traefik:
+    image: traefik:latest
+    command:
+      - "--configFile=/conf/traefik.toml"
+    ports:
+      - 80:80
+      - 443:443
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.${podName}.rule=Host(`${hostRule}`)
+        - traefik.http.routers.${podName}.service=api@internal
+        - traefik.http.routers.${podName}.entrypoints=websecure
+        - traefik.http.services.${podName}.loadbalancer.server.port=8080
+        - traefik.http.routers.${podName}.middlewares=${podName}-auth
+        - traefik.http.middlewares.${podName}-auth.basicauth.users=${traefikUser}:${traefikPass}
+    networks:
+      - proxy
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./conf:/conf:ro
+      - ./certs:/certs:ro
+    # Deploy block for docker swarm mode only - ignored by docker-compose
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.role == manager]
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.${podName}.rule=Host(`${hostRule}`)
+        - traefik.http.routers.${podName}.service=api@internal
+        - traefik.http.routers.${podName}.entrypoints=websecure
+        - traefik.http.services.${podName}.loadbalancer.server.port=8080
+        - traefik.http.routers.${podName}.middlewares=${podName}-auth
+        - traefik.http.middlewares.${podName}-auth.basicauth.users=${traefikUser}:${traefikPass}
+
+networks:
+  proxy:
+    external: false
+    name: proxy

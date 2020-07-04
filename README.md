@@ -1,21 +1,30 @@
 # docker-traefik
-A reverse proxy / load balancer that's easy, dynamic, automatic, fast,
-full-featured, open source, production proven, provides metrics,
-and integrates with every major cluster technology... No wonder it's so popular!
+
+Traefik v2 setup with customized security settings.
+
+- All traffic from port 80 is routed to port 443
+- Dashboard is SSL secured by default and not accessible in port 8080
+- Supports Docker Swarm mode
 
 ## Setup
 1. clone the repo
 2. create `.env` file from `.env.example`
-3. create your `traefik.toml` file from one of supplied templates:
-   - traefik.toml.example - allow http and https
-   - traefik-ssl.toml.example - redirect http to https 
-4. place cert files in `certs` folder 
-
-```
-The default user and password for the dashboard is admin/admin.
+* The default user and password for the dashboard is admin/admin.
 make sure to generate a new password using 'htpasswd' and
 replace it in your '.env' file
+
+3. create your `conf/traefik.toml` file from `conf/conf.d/traefik.toml.example`
+4. create your `conf/certificates.toml` file from `conf/conf.d/certificates.toml.example`
+5. create your `conf/tls.toml` file from `conf/tls.toml.example`
+6. place cert files to `certs` folder 
+7. copy docker-compose.dev.yml templates to docker-compose.yml
+
+- to create a docker-compose.prod.yml file for docker swarm run:
+
 ```
+docker-compose config > docker-compose.prod.yml
+``` 
+
 ## Network settings:
 Network name is 'proxy'
 

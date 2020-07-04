@@ -1,0 +1,9 @@
+[tls.stores]
+  [tls.stores.default]
+    [[tls.certificates]]
+      certFile = "/certs/cert.domain1.crt"
+      keyFile = "/certs/cert.domain1.key"
+
+    [[tls.certificates]]
+      certFile = "/certs/cert.domain2.crt"
+      keyFile = "/certs/cert.domain2.key"
