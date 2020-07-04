@@ -16,7 +16,7 @@ replace it in your '.env' file
 3. create your `conf/traefik.toml` file from `conf/conf.d/traefik.toml.example`
 4. create your `conf/certificates.toml` file from `conf/conf.d/certificates.toml.example`
 5. create your `conf/tls.toml` file from `conf/tls.toml.example`
-6. place cert files to `certs` folder 
+6. place certificate and private key files in `certs` folder 
 7. create your `docker-compose.yml` from `docker-compose.dev.yml`
 
 - to create a `docker-compose.prod.yml` file for docker swarm run:
