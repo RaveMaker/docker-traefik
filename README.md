@@ -12,7 +12,6 @@ Traefik v2 setup with customized security settings.
 * The default user and password for the dashboard is admin/admin.
 make sure to generate a new password using 'htpasswd' and
 replace it in your '.env' file
-
 3. create your `conf/traefik.toml` file from `conf/conf.d/traefik.toml.example`
 4. create your `conf/certificates.toml` file from `conf/conf.d/certificates.toml.example`
 5. create your `conf/tls.toml` file from `conf/tls.toml.example`
