@@ -9,14 +9,14 @@ services:
     ports:
       - 80:80
       - 443:443
-      labels:
-        - traefik.enable=true
-        - traefik.http.routers.${podName}.rule=Host(`${hostRule}`)
-        - traefik.http.routers.${podName}.service=api@internal
-        - traefik.http.routers.${podName}.entrypoints=websecure
-        - traefik.http.services.${podName}.loadbalancer.server.port=8080
-        - traefik.http.routers.${podName}.middlewares=${podName}-auth
-        - traefik.http.middlewares.${podName}-auth.basicauth.users=${traefikUser}:${traefikPass}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.${podName}.rule=Host(`${hostRule}`)
+      - traefik.http.routers.${podName}.service=api@internal
+      - traefik.http.routers.${podName}.entrypoints=websecure
+      - traefik.http.services.${podName}.loadbalancer.server.port=8080
+      - traefik.http.routers.${podName}.middlewares=${podName}-auth
+      - traefik.http.middlewares.${podName}-auth.basicauth.users=${traefikUser}:${traefikPass}
     networks:
       - proxy
     volumes:
